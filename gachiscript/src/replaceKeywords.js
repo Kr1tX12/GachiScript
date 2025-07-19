@@ -1,31 +1,25 @@
-const esprima = require('esprima');
-
 function replaceKeywords(code, dict) {
-  const tokens = esprima.tokenize(code, {
-    tolerant: true,
-    range: true
-  });
-
-  let result = '';
-  let lastIndex = 0;
-
-  for (const token of tokens) {
-    result += code.slice(lastIndex, token.range[0]);
-
-    if ((token.type === 'Keyword'
-         || token.type === 'Punctuator'
-         || token.type === 'Identifier')
-        && dict[token.value]) {
-      result += dict[token.value];
-    } else {
-      result += token.value;
+  return code.replace(/(["'`])(?:(?=(\\?))\2.)*?\1|\/\*[\s\S]*?\*\/|\/\/.*|[^\s]+/g, (match) => {
+    // Если это строка или комментарий — не трогаем
+    if (
+      /^["'`]/.test(match) || // строка
+      /^\/\//.test(match) ||  // однострочный коммент
+      /^\/\*/.test(match)     // многострочный коммент
+    ) {
+      return match;
     }
 
-    lastIndex = token.range[1];
-  }
+    // Чистим от лишних символов
+    const key = match.trim();
 
-  result += code.slice(lastIndex);
-  return result;
+    // Если в словаре есть замена — заменяем
+    if (dict[key]) {
+      return dict[key];
+    }
+
+    // Иначе возвращаем, как есть
+    return match;
+  });
 }
 
 module.exports = replaceKeywords;

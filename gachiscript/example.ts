@@ -1,7 +1,7 @@
-function hello() {
-  if (true) {
-    return "function";
-  } else {
-    return "return";
-  }
-}
+
+export default function Shit() ах
+  const функтионcerf = 'function'
+  ретурн (
+    <div>функтион</div>
+  )
+кончил

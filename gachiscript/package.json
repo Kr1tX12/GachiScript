@@ -1,6 +1,6 @@
 {
-  "name": "gachiscript",
-  "version": "1.0.0",
+  "name": "gachescript",
+  "version": "2.0.0",
   "description": "GachiScript: TypeScript с гачи-сленгом",
   "main": "src/index.js",
   "scripts": {
@@ -15,12 +15,8 @@
     "typescript",
     "gachi",
     "language",
-    "parser",
-    "esprima"
+    "parser"
   ],
-  "author": "Ты, создатель Гачи",
-  "license": "MIT",
-  "dependencies": {
-    "esprima": "^4.0.1"
-  }
+  "author": "я",
+  "license": "MIT"
 }
